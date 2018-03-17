@@ -1,0 +1,1845 @@
+html {
+	background: #EEEEEE;
+}
+
+table,
+td,
+tr {
+	border-collapse: collapse;
+}
+
+.boardcontainer {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.board {
+	display: block;
+	border: 1px solid black;
+}
+
+.board .row:nth-of-type(even) .space:nth-of-type(even),
+.board .row:nth-of-type(odd) .space:nth-of-type(odd) {
+	background-color: peachpuff;
+}
+
+.board .row:nth-of-type(odd) .space:nth-of-type(even),
+.board .row:nth-of-type(even) .space:nth-of-type(odd) {
+	background-color: chocolate;
+}
+
+.space {
+	height: 75px;
+	width: 75px;
+	position: relative;
+}
+
+.space[data-piece]:not([data-piece=""]):before {
+	content: "";
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	width: 85%;
+	height: 85%;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+}
+
+.space[data-piece="wking"]:before {
+	background-image: url(/UI/resources/pieces/wking.svg);
+}
+
+.space[data-piece="wqueen"]:before {
+	background-image: url(/UI/resources/pieces/wqueen.svg);
+}
+
+.space[data-piece="wrook"]:before {
+	background-image: url(/UI/resources/pieces/wrook.svg);
+}
+
+.space[data-piece="wbishop"]:before {
+	background-image: url(/UI/resources/pieces/wbishop.svg);
+}
+
+.space[data-piece="wknight"]:before {
+	background-image: url(/UI/resources/pieces/wknight.svg);
+}
+
+.space[data-piece="wpawn"]:before {
+	background-image: url(/UI/resources/pieces/wpawn.svg);
+}
+
+.space[data-piece="bking"]:before {
+	background-image: url(/UI/resources/pieces/bking.svg);
+}
+
+.space[data-piece="bqueen"]:before {
+	background-image: url(/UI/resources/pieces/bqueen.svg);
+}
+
+.space[data-piece="brook"]:before {
+	background-image: url(/UI/resources/pieces/brook.svg);
+}
+
+.space[data-piece="bbishop"]:before {
+	background-image: url(/UI/resources/pieces/bbishop.svg);
+}
+
+.space[data-piece="bknight"]:before {
+	background-image: url(/UI/resources/pieces/bknight.svg);
+}
+
+.space[data-piece="bpawn"]:before {
+	background-image: url(/UI/resources/pieces/bpawn.svg);
+}
+
+/* SASS Code for below
+
+@for $i from 0 through 100 {
+	.space[data-probability="#{$i}"]:before {
+		opacity: 0.1 + $i * 0.009;
+	}
+
+	.space[data-probability="#{$i}"]:after {
+		opacity: 0.1 + $i * 0.009;
+		content: "";
+		width: 30%;
+		height: 10%;
+		display: block;
+		position: absolute;
+		bottom: 10%;
+		right: 10%;
+		background: linear-gradient(to right, #9dd53a 0%, #a1d54f percentage($i/100), #80c217 percentage($i/100), #7cbc0a 100%);
+	}
+}
+
+*/
+
+.space[data-probability="0"]:before {
+	opacity: 0.1;
+}
+
+.space[data-probability="0"]:after {
+	opacity: 0.1;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(0%, #a1d54f), color-stop(0%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 0%, #80c217 0%, #7cbc0a 100%);
+}
+
+.space[data-probability="1"]:before {
+	opacity: 0.109;
+}
+
+.space[data-probability="1"]:after {
+	opacity: 0.109;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(1%, #a1d54f), color-stop(1%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 1%, #80c217 1%, #7cbc0a 100%);
+}
+
+.space[data-probability="2"]:before {
+	opacity: 0.118;
+}
+
+.space[data-probability="2"]:after {
+	opacity: 0.118;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(2%, #a1d54f), color-stop(2%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 2%, #80c217 2%, #7cbc0a 100%);
+}
+
+.space[data-probability="3"]:before {
+	opacity: 0.127;
+}
+
+.space[data-probability="3"]:after {
+	opacity: 0.127;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(3%, #a1d54f), color-stop(3%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 3%, #80c217 3%, #7cbc0a 100%);
+}
+
+.space[data-probability="4"]:before {
+	opacity: 0.136;
+}
+
+.space[data-probability="4"]:after {
+	opacity: 0.136;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(4%, #a1d54f), color-stop(4%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 4%, #80c217 4%, #7cbc0a 100%);
+}
+
+.space[data-probability="5"]:before {
+	opacity: 0.145;
+}
+
+.space[data-probability="5"]:after {
+	opacity: 0.145;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(5%, #a1d54f), color-stop(5%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 5%, #80c217 5%, #7cbc0a 100%);
+}
+
+.space[data-probability="6"]:before {
+	opacity: 0.154;
+}
+
+.space[data-probability="6"]:after {
+	opacity: 0.154;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(6%, #a1d54f), color-stop(6%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 6%, #80c217 6%, #7cbc0a 100%);
+}
+
+.space[data-probability="7"]:before {
+	opacity: 0.163;
+}
+
+.space[data-probability="7"]:after {
+	opacity: 0.163;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(7%, #a1d54f), color-stop(7%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 7%, #80c217 7%, #7cbc0a 100%);
+}
+
+.space[data-probability="8"]:before {
+	opacity: 0.172;
+}
+
+.space[data-probability="8"]:after {
+	opacity: 0.172;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(8%, #a1d54f), color-stop(8%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 8%, #80c217 8%, #7cbc0a 100%);
+}
+
+.space[data-probability="9"]:before {
+	opacity: 0.181;
+}
+
+.space[data-probability="9"]:after {
+	opacity: 0.181;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(9%, #a1d54f), color-stop(9%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 9%, #80c217 9%, #7cbc0a 100%);
+}
+
+.space[data-probability="10"]:before {
+	opacity: 0.19;
+}
+
+.space[data-probability="10"]:after {
+	opacity: 0.19;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(10%, #a1d54f), color-stop(10%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 10%, #80c217 10%, #7cbc0a 100%);
+}
+
+.space[data-probability="11"]:before {
+	opacity: 0.199;
+}
+
+.space[data-probability="11"]:after {
+	opacity: 0.199;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(11%, #a1d54f), color-stop(11%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 11%, #80c217 11%, #7cbc0a 100%);
+}
+
+.space[data-probability="12"]:before {
+	opacity: 0.208;
+}
+
+.space[data-probability="12"]:after {
+	opacity: 0.208;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(12%, #a1d54f), color-stop(12%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 12%, #80c217 12%, #7cbc0a 100%);
+}
+
+.space[data-probability="13"]:before {
+	opacity: 0.217;
+}
+
+.space[data-probability="13"]:after {
+	opacity: 0.217;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(13%, #a1d54f), color-stop(13%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 13%, #80c217 13%, #7cbc0a 100%);
+}
+
+.space[data-probability="14"]:before {
+	opacity: 0.226;
+}
+
+.space[data-probability="14"]:after {
+	opacity: 0.226;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(14%, #a1d54f), color-stop(14%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 14%, #80c217 14%, #7cbc0a 100%);
+}
+
+.space[data-probability="15"]:before {
+	opacity: 0.235;
+}
+
+.space[data-probability="15"]:after {
+	opacity: 0.235;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(15%, #a1d54f), color-stop(15%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 15%, #80c217 15%, #7cbc0a 100%);
+}
+
+.space[data-probability="16"]:before {
+	opacity: 0.244;
+}
+
+.space[data-probability="16"]:after {
+	opacity: 0.244;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(16%, #a1d54f), color-stop(16%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 16%, #80c217 16%, #7cbc0a 100%);
+}
+
+.space[data-probability="17"]:before {
+	opacity: 0.253;
+}
+
+.space[data-probability="17"]:after {
+	opacity: 0.253;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(17%, #a1d54f), color-stop(17%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 17%, #80c217 17%, #7cbc0a 100%);
+}
+
+.space[data-probability="18"]:before {
+	opacity: 0.262;
+}
+
+.space[data-probability="18"]:after {
+	opacity: 0.262;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(18%, #a1d54f), color-stop(18%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 18%, #80c217 18%, #7cbc0a 100%);
+}
+
+.space[data-probability="19"]:before {
+	opacity: 0.271;
+}
+
+.space[data-probability="19"]:after {
+	opacity: 0.271;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(19%, #a1d54f), color-stop(19%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 19%, #80c217 19%, #7cbc0a 100%);
+}
+
+.space[data-probability="20"]:before {
+	opacity: 0.28;
+}
+
+.space[data-probability="20"]:after {
+	opacity: 0.28;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(20%, #a1d54f), color-stop(20%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 20%, #80c217 20%, #7cbc0a 100%);
+}
+
+.space[data-probability="21"]:before {
+	opacity: 0.289;
+}
+
+.space[data-probability="21"]:after {
+	opacity: 0.289;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(21%, #a1d54f), color-stop(21%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 21%, #80c217 21%, #7cbc0a 100%);
+}
+
+.space[data-probability="22"]:before {
+	opacity: 0.298;
+}
+
+.space[data-probability="22"]:after {
+	opacity: 0.298;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(22%, #a1d54f), color-stop(22%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 22%, #80c217 22%, #7cbc0a 100%);
+}
+
+.space[data-probability="23"]:before {
+	opacity: 0.307;
+}
+
+.space[data-probability="23"]:after {
+	opacity: 0.307;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(23%, #a1d54f), color-stop(23%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 23%, #80c217 23%, #7cbc0a 100%);
+}
+
+.space[data-probability="24"]:before {
+	opacity: 0.316;
+}
+
+.space[data-probability="24"]:after {
+	opacity: 0.316;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(24%, #a1d54f), color-stop(24%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 24%, #80c217 24%, #7cbc0a 100%);
+}
+
+.space[data-probability="25"]:before {
+	opacity: 0.325;
+}
+
+.space[data-probability="25"]:after {
+	opacity: 0.325;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(25%, #a1d54f), color-stop(25%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 25%, #80c217 25%, #7cbc0a 100%);
+}
+
+.space[data-probability="26"]:before {
+	opacity: 0.334;
+}
+
+.space[data-probability="26"]:after {
+	opacity: 0.334;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(26%, #a1d54f), color-stop(26%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 26%, #80c217 26%, #7cbc0a 100%);
+}
+
+.space[data-probability="27"]:before {
+	opacity: 0.343;
+}
+
+.space[data-probability="27"]:after {
+	opacity: 0.343;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(27%, #a1d54f), color-stop(27%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 27%, #80c217 27%, #7cbc0a 100%);
+}
+
+.space[data-probability="28"]:before {
+	opacity: 0.352;
+}
+
+.space[data-probability="28"]:after {
+	opacity: 0.352;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(28%, #a1d54f), color-stop(28%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 28%, #80c217 28%, #7cbc0a 100%);
+}
+
+.space[data-probability="29"]:before {
+	opacity: 0.361;
+}
+
+.space[data-probability="29"]:after {
+	opacity: 0.361;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(29%, #a1d54f), color-stop(29%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 29%, #80c217 29%, #7cbc0a 100%);
+}
+
+.space[data-probability="30"]:before {
+	opacity: 0.37;
+}
+
+.space[data-probability="30"]:after {
+	opacity: 0.37;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(30%, #a1d54f), color-stop(30%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 30%, #80c217 30%, #7cbc0a 100%);
+}
+
+.space[data-probability="31"]:before {
+	opacity: 0.379;
+}
+
+.space[data-probability="31"]:after {
+	opacity: 0.379;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(31%, #a1d54f), color-stop(31%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 31%, #80c217 31%, #7cbc0a 100%);
+}
+
+.space[data-probability="32"]:before {
+	opacity: 0.388;
+}
+
+.space[data-probability="32"]:after {
+	opacity: 0.388;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(32%, #a1d54f), color-stop(32%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 32%, #80c217 32%, #7cbc0a 100%);
+}
+
+.space[data-probability="33"]:before {
+	opacity: 0.397;
+}
+
+.space[data-probability="33"]:after {
+	opacity: 0.397;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(33%, #a1d54f), color-stop(33%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 33%, #80c217 33%, #7cbc0a 100%);
+}
+
+.space[data-probability="34"]:before {
+	opacity: 0.406;
+}
+
+.space[data-probability="34"]:after {
+	opacity: 0.406;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(34%, #a1d54f), color-stop(34%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 34%, #80c217 34%, #7cbc0a 100%);
+}
+
+.space[data-probability="35"]:before {
+	opacity: 0.415;
+}
+
+.space[data-probability="35"]:after {
+	opacity: 0.415;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(35%, #a1d54f), color-stop(35%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 35%, #80c217 35%, #7cbc0a 100%);
+}
+
+.space[data-probability="36"]:before {
+	opacity: 0.424;
+}
+
+.space[data-probability="36"]:after {
+	opacity: 0.424;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(36%, #a1d54f), color-stop(36%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 36%, #80c217 36%, #7cbc0a 100%);
+}
+
+.space[data-probability="37"]:before {
+	opacity: 0.433;
+}
+
+.space[data-probability="37"]:after {
+	opacity: 0.433;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(37%, #a1d54f), color-stop(37%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 37%, #80c217 37%, #7cbc0a 100%);
+}
+
+.space[data-probability="38"]:before {
+	opacity: 0.442;
+}
+
+.space[data-probability="38"]:after {
+	opacity: 0.442;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(38%, #a1d54f), color-stop(38%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 38%, #80c217 38%, #7cbc0a 100%);
+}
+
+.space[data-probability="39"]:before {
+	opacity: 0.451;
+}
+
+.space[data-probability="39"]:after {
+	opacity: 0.451;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(39%, #a1d54f), color-stop(39%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 39%, #80c217 39%, #7cbc0a 100%);
+}
+
+.space[data-probability="40"]:before {
+	opacity: 0.46;
+}
+
+.space[data-probability="40"]:after {
+	opacity: 0.46;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(40%, #a1d54f), color-stop(40%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 40%, #80c217 40%, #7cbc0a 100%);
+}
+
+.space[data-probability="41"]:before {
+	opacity: 0.469;
+}
+
+.space[data-probability="41"]:after {
+	opacity: 0.469;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(41%, #a1d54f), color-stop(41%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 41%, #80c217 41%, #7cbc0a 100%);
+}
+
+.space[data-probability="42"]:before {
+	opacity: 0.478;
+}
+
+.space[data-probability="42"]:after {
+	opacity: 0.478;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(42%, #a1d54f), color-stop(42%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 42%, #80c217 42%, #7cbc0a 100%);
+}
+
+.space[data-probability="43"]:before {
+	opacity: 0.487;
+}
+
+.space[data-probability="43"]:after {
+	opacity: 0.487;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(43%, #a1d54f), color-stop(43%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 43%, #80c217 43%, #7cbc0a 100%);
+}
+
+.space[data-probability="44"]:before {
+	opacity: 0.496;
+}
+
+.space[data-probability="44"]:after {
+	opacity: 0.496;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(44%, #a1d54f), color-stop(44%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 44%, #80c217 44%, #7cbc0a 100%);
+}
+
+.space[data-probability="45"]:before {
+	opacity: 0.505;
+}
+
+.space[data-probability="45"]:after {
+	opacity: 0.505;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(45%, #a1d54f), color-stop(45%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 45%, #80c217 45%, #7cbc0a 100%);
+}
+
+.space[data-probability="46"]:before {
+	opacity: 0.514;
+}
+
+.space[data-probability="46"]:after {
+	opacity: 0.514;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(46%, #a1d54f), color-stop(46%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 46%, #80c217 46%, #7cbc0a 100%);
+}
+
+.space[data-probability="47"]:before {
+	opacity: 0.523;
+}
+
+.space[data-probability="47"]:after {
+	opacity: 0.523;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(47%, #a1d54f), color-stop(47%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 47%, #80c217 47%, #7cbc0a 100%);
+}
+
+.space[data-probability="48"]:before {
+	opacity: 0.532;
+}
+
+.space[data-probability="48"]:after {
+	opacity: 0.532;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(48%, #a1d54f), color-stop(48%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 48%, #80c217 48%, #7cbc0a 100%);
+}
+
+.space[data-probability="49"]:before {
+	opacity: 0.541;
+}
+
+.space[data-probability="49"]:after {
+	opacity: 0.541;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(49%, #a1d54f), color-stop(49%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 49%, #80c217 49%, #7cbc0a 100%);
+}
+
+.space[data-probability="50"]:before {
+	opacity: 0.55;
+}
+
+.space[data-probability="50"]:after {
+	opacity: 0.55;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(50%, #a1d54f), color-stop(50%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 50%, #80c217 50%, #7cbc0a 100%);
+}
+
+.space[data-probability="51"]:before {
+	opacity: 0.559;
+}
+
+.space[data-probability="51"]:after {
+	opacity: 0.559;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(51%, #a1d54f), color-stop(51%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 51%, #80c217 51%, #7cbc0a 100%);
+}
+
+.space[data-probability="52"]:before {
+	opacity: 0.568;
+}
+
+.space[data-probability="52"]:after {
+	opacity: 0.568;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(52%, #a1d54f), color-stop(52%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 52%, #80c217 52%, #7cbc0a 100%);
+}
+
+.space[data-probability="53"]:before {
+	opacity: 0.577;
+}
+
+.space[data-probability="53"]:after {
+	opacity: 0.577;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(53%, #a1d54f), color-stop(53%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 53%, #80c217 53%, #7cbc0a 100%);
+}
+
+.space[data-probability="54"]:before {
+	opacity: 0.586;
+}
+
+.space[data-probability="54"]:after {
+	opacity: 0.586;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(54%, #a1d54f), color-stop(54%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 54%, #80c217 54%, #7cbc0a 100%);
+}
+
+.space[data-probability="55"]:before {
+	opacity: 0.595;
+}
+
+.space[data-probability="55"]:after {
+	opacity: 0.595;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(55%, #a1d54f), color-stop(55%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 55%, #80c217 55%, #7cbc0a 100%);
+}
+
+.space[data-probability="56"]:before {
+	opacity: 0.604;
+}
+
+.space[data-probability="56"]:after {
+	opacity: 0.604;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(56%, #a1d54f), color-stop(56%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 56%, #80c217 56%, #7cbc0a 100%);
+}
+
+.space[data-probability="57"]:before {
+	opacity: 0.613;
+}
+
+.space[data-probability="57"]:after {
+	opacity: 0.613;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(57%, #a1d54f), color-stop(57%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 57%, #80c217 57%, #7cbc0a 100%);
+}
+
+.space[data-probability="58"]:before {
+	opacity: 0.622;
+}
+
+.space[data-probability="58"]:after {
+	opacity: 0.622;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(58%, #a1d54f), color-stop(58%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 58%, #80c217 58%, #7cbc0a 100%);
+}
+
+.space[data-probability="59"]:before {
+	opacity: 0.631;
+}
+
+.space[data-probability="59"]:after {
+	opacity: 0.631;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(59%, #a1d54f), color-stop(59%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 59%, #80c217 59%, #7cbc0a 100%);
+}
+
+.space[data-probability="60"]:before {
+	opacity: 0.64;
+}
+
+.space[data-probability="60"]:after {
+	opacity: 0.64;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(60%, #a1d54f), color-stop(60%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 60%, #80c217 60%, #7cbc0a 100%);
+}
+
+.space[data-probability="61"]:before {
+	opacity: 0.649;
+}
+
+.space[data-probability="61"]:after {
+	opacity: 0.649;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(61%, #a1d54f), color-stop(61%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 61%, #80c217 61%, #7cbc0a 100%);
+}
+
+.space[data-probability="62"]:before {
+	opacity: 0.658;
+}
+
+.space[data-probability="62"]:after {
+	opacity: 0.658;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(62%, #a1d54f), color-stop(62%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 62%, #80c217 62%, #7cbc0a 100%);
+}
+
+.space[data-probability="63"]:before {
+	opacity: 0.667;
+}
+
+.space[data-probability="63"]:after {
+	opacity: 0.667;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(63%, #a1d54f), color-stop(63%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 63%, #80c217 63%, #7cbc0a 100%);
+}
+
+.space[data-probability="64"]:before {
+	opacity: 0.676;
+}
+
+.space[data-probability="64"]:after {
+	opacity: 0.676;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(64%, #a1d54f), color-stop(64%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 64%, #80c217 64%, #7cbc0a 100%);
+}
+
+.space[data-probability="65"]:before {
+	opacity: 0.685;
+}
+
+.space[data-probability="65"]:after {
+	opacity: 0.685;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(65%, #a1d54f), color-stop(65%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 65%, #80c217 65%, #7cbc0a 100%);
+}
+
+.space[data-probability="66"]:before {
+	opacity: 0.694;
+}
+
+.space[data-probability="66"]:after {
+	opacity: 0.694;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(66%, #a1d54f), color-stop(66%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 66%, #80c217 66%, #7cbc0a 100%);
+}
+
+.space[data-probability="67"]:before {
+	opacity: 0.703;
+}
+
+.space[data-probability="67"]:after {
+	opacity: 0.703;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(67%, #a1d54f), color-stop(67%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 67%, #80c217 67%, #7cbc0a 100%);
+}
+
+.space[data-probability="68"]:before {
+	opacity: 0.712;
+}
+
+.space[data-probability="68"]:after {
+	opacity: 0.712;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(68%, #a1d54f), color-stop(68%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 68%, #80c217 68%, #7cbc0a 100%);
+}
+
+.space[data-probability="69"]:before {
+	opacity: 0.721;
+}
+
+.space[data-probability="69"]:after {
+	opacity: 0.721;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(69%, #a1d54f), color-stop(69%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 69%, #80c217 69%, #7cbc0a 100%);
+}
+
+.space[data-probability="70"]:before {
+	opacity: 0.73;
+}
+
+.space[data-probability="70"]:after {
+	opacity: 0.73;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(70%, #a1d54f), color-stop(70%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 70%, #80c217 70%, #7cbc0a 100%);
+}
+
+.space[data-probability="71"]:before {
+	opacity: 0.739;
+}
+
+.space[data-probability="71"]:after {
+	opacity: 0.739;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(71%, #a1d54f), color-stop(71%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 71%, #80c217 71%, #7cbc0a 100%);
+}
+
+.space[data-probability="72"]:before {
+	opacity: 0.748;
+}
+
+.space[data-probability="72"]:after {
+	opacity: 0.748;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(72%, #a1d54f), color-stop(72%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 72%, #80c217 72%, #7cbc0a 100%);
+}
+
+.space[data-probability="73"]:before {
+	opacity: 0.757;
+}
+
+.space[data-probability="73"]:after {
+	opacity: 0.757;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(73%, #a1d54f), color-stop(73%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 73%, #80c217 73%, #7cbc0a 100%);
+}
+
+.space[data-probability="74"]:before {
+	opacity: 0.766;
+}
+
+.space[data-probability="74"]:after {
+	opacity: 0.766;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(74%, #a1d54f), color-stop(74%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 74%, #80c217 74%, #7cbc0a 100%);
+}
+
+.space[data-probability="75"]:before {
+	opacity: 0.775;
+}
+
+.space[data-probability="75"]:after {
+	opacity: 0.775;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(75%, #a1d54f), color-stop(75%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 75%, #80c217 75%, #7cbc0a 100%);
+}
+
+.space[data-probability="76"]:before {
+	opacity: 0.784;
+}
+
+.space[data-probability="76"]:after {
+	opacity: 0.784;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(76%, #a1d54f), color-stop(76%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 76%, #80c217 76%, #7cbc0a 100%);
+}
+
+.space[data-probability="77"]:before {
+	opacity: 0.793;
+}
+
+.space[data-probability="77"]:after {
+	opacity: 0.793;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(77%, #a1d54f), color-stop(77%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 77%, #80c217 77%, #7cbc0a 100%);
+}
+
+.space[data-probability="78"]:before {
+	opacity: 0.802;
+}
+
+.space[data-probability="78"]:after {
+	opacity: 0.802;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(78%, #a1d54f), color-stop(78%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 78%, #80c217 78%, #7cbc0a 100%);
+}
+
+.space[data-probability="79"]:before {
+	opacity: 0.811;
+}
+
+.space[data-probability="79"]:after {
+	opacity: 0.811;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(79%, #a1d54f), color-stop(79%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 79%, #80c217 79%, #7cbc0a 100%);
+}
+
+.space[data-probability="80"]:before {
+	opacity: 0.82;
+}
+
+.space[data-probability="80"]:after {
+	opacity: 0.82;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(80%, #a1d54f), color-stop(80%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 80%, #80c217 80%, #7cbc0a 100%);
+}
+
+.space[data-probability="81"]:before {
+	opacity: 0.829;
+}
+
+.space[data-probability="81"]:after {
+	opacity: 0.829;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(81%, #a1d54f), color-stop(81%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 81%, #80c217 81%, #7cbc0a 100%);
+}
+
+.space[data-probability="82"]:before {
+	opacity: 0.838;
+}
+
+.space[data-probability="82"]:after {
+	opacity: 0.838;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(82%, #a1d54f), color-stop(82%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 82%, #80c217 82%, #7cbc0a 100%);
+}
+
+.space[data-probability="83"]:before {
+	opacity: 0.847;
+}
+
+.space[data-probability="83"]:after {
+	opacity: 0.847;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(83%, #a1d54f), color-stop(83%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 83%, #80c217 83%, #7cbc0a 100%);
+}
+
+.space[data-probability="84"]:before {
+	opacity: 0.856;
+}
+
+.space[data-probability="84"]:after {
+	opacity: 0.856;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(84%, #a1d54f), color-stop(84%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 84%, #80c217 84%, #7cbc0a 100%);
+}
+
+.space[data-probability="85"]:before {
+	opacity: 0.865;
+}
+
+.space[data-probability="85"]:after {
+	opacity: 0.865;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(85%, #a1d54f), color-stop(85%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 85%, #80c217 85%, #7cbc0a 100%);
+}
+
+.space[data-probability="86"]:before {
+	opacity: 0.874;
+}
+
+.space[data-probability="86"]:after {
+	opacity: 0.874;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(86%, #a1d54f), color-stop(86%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 86%, #80c217 86%, #7cbc0a 100%);
+}
+
+.space[data-probability="87"]:before {
+	opacity: 0.883;
+}
+
+.space[data-probability="87"]:after {
+	opacity: 0.883;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(87%, #a1d54f), color-stop(87%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 87%, #80c217 87%, #7cbc0a 100%);
+}
+
+.space[data-probability="88"]:before {
+	opacity: 0.892;
+}
+
+.space[data-probability="88"]:after {
+	opacity: 0.892;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(88%, #a1d54f), color-stop(88%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 88%, #80c217 88%, #7cbc0a 100%);
+}
+
+.space[data-probability="89"]:before {
+	opacity: 0.901;
+}
+
+.space[data-probability="89"]:after {
+	opacity: 0.901;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(89%, #a1d54f), color-stop(89%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 89%, #80c217 89%, #7cbc0a 100%);
+}
+
+.space[data-probability="90"]:before {
+	opacity: 0.91;
+}
+
+.space[data-probability="90"]:after {
+	opacity: 0.91;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(90%, #a1d54f), color-stop(90%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 90%, #80c217 90%, #7cbc0a 100%);
+}
+
+.space[data-probability="91"]:before {
+	opacity: 0.919;
+}
+
+.space[data-probability="91"]:after {
+	opacity: 0.919;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(91%, #a1d54f), color-stop(91%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 91%, #80c217 91%, #7cbc0a 100%);
+}
+
+.space[data-probability="92"]:before {
+	opacity: 0.928;
+}
+
+.space[data-probability="92"]:after {
+	opacity: 0.928;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(92%, #a1d54f), color-stop(92%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 92%, #80c217 92%, #7cbc0a 100%);
+}
+
+.space[data-probability="93"]:before {
+	opacity: 0.937;
+}
+
+.space[data-probability="93"]:after {
+	opacity: 0.937;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(93%, #a1d54f), color-stop(93%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 93%, #80c217 93%, #7cbc0a 100%);
+}
+
+.space[data-probability="94"]:before {
+	opacity: 0.946;
+}
+
+.space[data-probability="94"]:after {
+	opacity: 0.946;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(94%, #a1d54f), color-stop(94%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 94%, #80c217 94%, #7cbc0a 100%);
+}
+
+.space[data-probability="95"]:before {
+	opacity: 0.955;
+}
+
+.space[data-probability="95"]:after {
+	opacity: 0.955;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(95%, #a1d54f), color-stop(95%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 95%, #80c217 95%, #7cbc0a 100%);
+}
+
+.space[data-probability="96"]:before {
+	opacity: 0.964;
+}
+
+.space[data-probability="96"]:after {
+	opacity: 0.964;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(96%, #a1d54f), color-stop(96%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 96%, #80c217 96%, #7cbc0a 100%);
+}
+
+.space[data-probability="97"]:before {
+	opacity: 0.973;
+}
+
+.space[data-probability="97"]:after {
+	opacity: 0.973;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(97%, #a1d54f), color-stop(97%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 97%, #80c217 97%, #7cbc0a 100%);
+}
+
+.space[data-probability="98"]:before {
+	opacity: 0.982;
+}
+
+.space[data-probability="98"]:after {
+	opacity: 0.982;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(98%, #a1d54f), color-stop(98%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 98%, #80c217 98%, #7cbc0a 100%);
+}
+
+.space[data-probability="99"]:before {
+	opacity: 0.991;
+}
+
+.space[data-probability="99"]:after {
+	opacity: 0.991;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(99%, #a1d54f), color-stop(99%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 99%, #80c217 99%, #7cbc0a 100%);
+}
+
+.space[data-probability="100"]:before {
+	opacity: 1;
+}
+
+.space[data-probability="100"]:after {
+	opacity: 1;
+	content: "";
+	width: 30%;
+	height: 10%;
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	background: -webkit-gradient(linear, left top, right top, from(#9dd53a), color-stop(100%, #a1d54f), color-stop(100%, #80c217), to(#7cbc0a));
+	background: linear-gradient(to right, #9dd53a 0%, #a1d54f 100%, #80c217 100%, #7cbc0a 100%);
+}
