@@ -62,6 +62,7 @@ function validateMove(move, piece) {
 	return true;
 }
 
+
 function getMove(el, isPiece) {
 	var square = getSquare(el);
 	if (canSelectMove) {
