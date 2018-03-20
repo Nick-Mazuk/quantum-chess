@@ -27,3 +27,7 @@ Each piece has a specific character attached to it:
 | P | Pawn |
 
 White pieces are uppercase while black pieces are lowercase.
+
+## Move Representation
+
+For simplicity of coding, the chess board is going to use the numbers 0-7 in both directions instead of traditional chess notation. However, the direction and order of the rows and columns are exactly the same. E.g. `[3, 0]` is where the white queen starts the game.

@@ -5,7 +5,7 @@ var canSelectMove = false; //true if there is an active piece and there is a pot
 var initstate = [[["r", 1], ["n", 1], ["b", 1], ["q", 1], ["k", 1], ["b", 1], ["n", 1], ["r", 1]],
  [["p", 1], ["p", 1], ["p", 1], ["p", 1], ["p", 1], ["p", 1], ["p", 1], ["p", 1]],
  [[], [], [], [], [], [], [], []],
- [[], [], [], [], [], [], ["P", 0.01], []],
+ [[], [], [], [], [], [], [], []],
  [[], [], [], [], [], [], [], []],
  [[], [], [], [], [], [], [], []],
  [["P", 1], ["P", 1], ["P", 1], ["P", 1], ["P", 1], ["P", 1], ["P", 1], ["P", 1]],
@@ -56,12 +56,54 @@ function isValidKingMove(move) {
 	return false;
 }
 
-function validateMove(move, piece) {
-	var pieceType = piece.dataset.piece;
+function isValidKnightMove(move) {
+	var distance = getMoveDistance(move)
+	if (distance > 2.1 && distance < 2.3)
+		return true;
+	return false;
+}
 
+function isValidQueenMove(move) {
+	return isValidRookMove(move) || isValidBishopMove(move);
+}
+
+function isValidRookMove(move) {
+	return move[0][0] == move[1][0] || move[0][1] == move[1][1];
+}
+
+function isValidBishopMove(move) {
+	return Math.abs(move[0][0] - move[1][0]) == Math.abs(move[0][1] - move[1][1]);
+}
+
+function isValidPawnMove(move) {
 	return true;
 }
 
+function validateMove(move, piece) {
+	var pieceType = piece.dataset.piece.toLowerCase();
+	switch (pieceType) {
+		case "k":
+			return isValidKingMove(move);
+			break;
+		case "n":
+			return isValidKnightMove(move);
+			break;
+		case "q":
+			return isValidQueenMove(move);
+			break;
+		case "r":
+			return isValidRookMove(move);
+			break;
+		case "b":
+			return isValidBishopMove(move);
+			break;
+		case "p":
+			return isValidPawnMove(move);
+			break;
+		default:
+			return false;
+	}
+}
 
 function getMove(el, isPiece) {
 	var square = getSquare(el);
@@ -72,6 +114,8 @@ function getMove(el, isPiece) {
 			sendMove(move);
 			clearActive(true);
 			return true;
+		} else {
+			clearActive(true);
 		}
 	} else if (isPiece) {
 		canSelectMove = true;
