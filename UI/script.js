@@ -53,7 +53,16 @@ function getMoveDistance(move) {
 function isValidKingMove(move) {
 	if (getMoveDistance(move) < 1.8)
 		return true;
-	return false;
+	//now checking for castling (only knocks out a few cases that cannot be castling, not necessarily all invalid castling combinations)
+	if (move[0][0] != 4) //checks for valid column
+		return false;
+	if (move[0][1] != 0 && move[0][1] != 7) //checks for valid rows
+		return false;
+	if (Math.abs(move[0][0] - move[1][0]) != 2) //checks if king is moving 2 squares to the side
+		return false;
+	if (move[0][1] - move[1][1] != 0) //checks to make sure the king is not moving vertically
+		return false;
+	return true;
 }
 
 function isValidKnightMove(move) {
